@@ -1,0 +1,549 @@
+:root {
+  --main: #198caa;
+  --main-light: #5ed8f0;
+  --main-dark: #063948;
+  --accent: #ffd84d;
+  --pink: #ff78b8;
+  --panel: rgba(5, 30, 42, 0.9);
+  --text: #f2fdff;
+  --muted: #bdeaf2;
+  --error: #ff6b8a;
+  --success: #6dffb2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: "Courier New", Consolas, monospace;
+  background:
+    linear-gradient(135deg, rgba(25, 140, 170, 0.25), transparent 35%),
+    linear-gradient(225deg, rgba(255, 120, 184, 0.18), transparent 32%),
+    #031a24;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.scanline {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.04) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  mix-blend-mode: screen;
+}
+
+.screen {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.title-screen {
+  display: grid;
+  place-items: center;
+  grid-template-rows: 1fr auto;
+  gap: 18px;
+}
+
+.title-box {
+  width: min(760px, 100%);
+  padding: 36px;
+  text-align: center;
+  border: 4px solid var(--main-light);
+  background: rgba(3, 26, 36, 0.86);
+  box-shadow: 0 0 0 6px var(--main-dark), 0 0 36px rgba(94, 216, 240, 0.4);
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: clamp(2.3rem, 8vw, 5.4rem);
+  line-height: 1.02;
+  text-shadow: 4px 4px 0 var(--main-dark), 0 0 18px var(--main-light);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.6rem);
+}
+
+.pixel-button {
+  min-height: 44px;
+  margin: 10px 6px 0;
+  padding: 10px 18px;
+  color: var(--text);
+  cursor: pointer;
+  border: 3px solid var(--main-light);
+  border-radius: 0;
+  background: var(--main-dark);
+  box-shadow: 4px 4px 0 #010a0e;
+}
+
+.pixel-button:hover,
+.pixel-button:focus-visible {
+  transform: translate(-1px, -1px);
+  background: #0b5266;
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.pixel-button:disabled {
+  color: #6f929a;
+  cursor: not-allowed;
+  border-color: #335e68;
+  background: #102d36;
+  box-shadow: none;
+  transform: none;
+  outline: none;
+}
+
+.pixel-button.primary {
+  color: #02161d;
+  background: var(--accent);
+  border-color: #fff1a0;
+}
+
+.pixel-button.small {
+  min-height: 38px;
+  padding: 8px 12px;
+}
+
+.game-screen {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 560px) 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.board-panel,
+.clue-panel,
+.password-panel,
+.explanations {
+  border: 3px solid var(--main);
+  background: var(--panel);
+  box-shadow: 0 0 22px rgba(25, 140, 170, 0.24);
+}
+
+.board-panel {
+  padding: 16px;
+}
+
+.crossword-board {
+  display: grid;
+  grid-template-columns: repeat(11, minmax(24px, 1fr));
+  gap: 3px;
+  width: min(100%, 560px);
+  margin: 0 auto;
+}
+
+.cell {
+  position: relative;
+  aspect-ratio: 1;
+  min-width: 0;
+}
+
+.cell.block {
+  background: #020a0d;
+  border: 2px solid #020a0d;
+}
+
+.cell input {
+  width: 100%;
+  height: 100%;
+  padding: 14px 2px 2px;
+  color: #01202a;
+  text-align: center;
+  font-size: clamp(1rem, 3.3vw, 1.7rem);
+  font-weight: 700;
+  border: 2px solid var(--main-dark);
+  border-radius: 0;
+  background: #dffbff;
+}
+
+.cell input:focus {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+  background: #ffffff;
+}
+
+.cell.password-cell input {
+  background: #fff4a8;
+}
+
+.cell.vertical-long input {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  line-height: 1;
+}
+
+.clue-number,
+.password-number {
+  position: absolute;
+  z-index: 2;
+  left: 3px;
+  font-size: clamp(0.5rem, 1.6vw, 0.7rem);
+  line-height: 1;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.clue-number {
+  top: 3px;
+  color: var(--main-dark);
+}
+
+.password-number {
+  right: 2px;
+  bottom: 2px;
+  left: auto;
+  color: #a05a00;
+}
+
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.status-message {
+  min-height: 1.4em;
+  margin: 12px 0 0;
+  font-weight: 700;
+}
+
+.status-message.success {
+  color: var(--success);
+}
+
+.status-message.error {
+  color: var(--error);
+}
+
+.clue-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  padding: 18px;
+}
+
+.clue-panel h3 {
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+
+.clue-list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.clue-list li {
+  margin-bottom: 12px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.clue-list strong {
+  display: inline-block;
+  min-width: 2.2em;
+  color: var(--text);
+}
+
+.password-panel {
+  margin-top: 24px;
+  padding: 20px;
+}
+
+.password-panel.locked {
+  opacity: 0.62;
+}
+
+.password-form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.password-form input {
+  flex: 1 1 260px;
+  min-height: 46px;
+  padding: 10px 12px;
+  color: var(--text);
+  border: 3px solid var(--main-light);
+  border-radius: 0;
+  background: #041a22;
+}
+
+.how-to-dialog {
+  width: min(520px, calc(100% - 32px));
+  color: var(--text);
+  border: 4px solid var(--main-light);
+  background: #041c26;
+  box-shadow: 0 0 0 6px var(--main-dark);
+}
+
+.how-to-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.how-to-dialog h2 {
+  color: var(--accent);
+}
+
+.how-to-dialog p {
+  line-height: 1.7;
+}
+
+.celebration-screen {
+  padding: 0;
+  background: #031a24;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 20;
+}
+
+.celebration-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    linear-gradient(to bottom, rgba(25, 140, 170, 0.18), transparent 34%),
+    #031a24;
+}
+
+.birthday-art {
+  display: block;
+  width: 100%;
+  height: min(68vh, 62vw);
+  min-height: 280px;
+  object-fit: contain;
+  filter: blur(24px);
+  transform: scale(1.05);
+  animation: clearArt 3s ease-out 0.4s forwards;
+}
+
+.birthday-copy {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 24px 24px 7vh;
+  text-align: center;
+  border-top: 3px solid rgba(94, 216, 240, 0.42);
+  background:
+    linear-gradient(to bottom, rgba(94, 216, 240, 0.12), transparent 44%),
+    rgba(3, 26, 36, 0.94);
+  text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.78), 0 0 24px rgba(255, 255, 255, 0.72);
+}
+
+.birthday-line {
+  margin: 0;
+  opacity: 0;
+  font-weight: 700;
+  animation: fadeUp 1s ease-out forwards;
+}
+
+.line-one {
+  font-size: clamp(2.3rem, 8vw, 6rem);
+  animation-delay: 3.6s;
+}
+
+.line-two {
+  font-size: clamp(1.7rem, 5.6vw, 4.4rem);
+  animation-delay: 4.5s;
+}
+
+.line-three {
+  font-size: clamp(1.4rem, 4vw, 3rem);
+  animation-delay: 5.4s;
+}
+
+.explanations {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px;
+  border-width: 0 3px 3px;
+}
+
+.section-heading {
+  margin-bottom: 20px;
+}
+
+.accordion-item {
+  border-top: 2px solid rgba(94, 216, 240, 0.28);
+}
+
+.accordion-button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0;
+  color: var(--text);
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.accordion-button span {
+  color: var(--accent);
+}
+
+.accordion-body {
+  display: none;
+  padding: 0 0 18px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.accordion-item.open .accordion-body {
+  display: block;
+}
+
+.video-area {
+  margin-top: 12px;
+}
+
+.video-area iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 3px solid var(--main-light);
+}
+
+.plain-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--accent);
+  word-break: break-all;
+}
+
+.play-again-button {
+  margin-top: 24px;
+}
+
+.fan-credit {
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.screen-credit {
+  opacity: 0.82;
+}
+
+.title-credit {
+  margin-top: 0;
+}
+
+@keyframes clearArt {
+  to {
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .game-layout,
+  .clue-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .game-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 560px) {
+  .screen {
+    padding: 14px;
+  }
+
+  .title-box {
+    padding: 24px 16px;
+  }
+
+  .crossword-board {
+    gap: 2px;
+  }
+
+  .cell input {
+    padding-top: 11px;
+  }
+
+  .fixed-top {
+    top: 10px;
+    right: 10px;
+  }
+}
