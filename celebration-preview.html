@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celebration Preview</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="scanline" aria-hidden="true"></div>
+
+  <main>
+    <!--
+      This file is only for checking the celebration page during development.
+      The real game flow still starts from index.html.
+    -->
+    <section id="title-screen" class="screen title-screen hidden">
+      <div class="title-box">
+        <p class="eyebrow">ROCO BIRTHDAY 2026</p>
+        <h1>Kaburaki<br>Crossword Puzzle</h1>
+        <button class="pixel-button" id="title-how-to-button" type="button">HOW TO PLAY</button>
+        <button class="pixel-button primary" id="start-button" type="button">PRESS START</button>
+      </div>
+      <p class="fan-credit screen-credit title-credit">
+        This is an unofficial fan-made game.<br>
+        Created by ちゃまっぴ（@chama_65）
+      </p>
+    </section>
+
+    <section id="game-screen" class="screen game-screen hidden">
+      <header class="game-header">
+        <div>
+          <p class="eyebrow">CROSSWORD</p>
+          <h2>Kaburaki Crossword Puzzle</h2>
+        </div>
+        <button class="pixel-button small" id="game-how-to-button" type="button">HOW TO PLAY</button>
+      </header>
+
+      <div class="game-layout">
+        <section class="board-panel" aria-label="クロスワード盤面">
+          <div id="crossword-board" class="crossword-board"></div>
+          <div class="action-row">
+            <button class="pixel-button primary" id="check-button" type="button" disabled>CHECK</button>
+            <p id="check-message" class="status-message" aria-live="polite"></p>
+          </div>
+        </section>
+
+        <aside class="clue-panel">
+          <div>
+            <h3>縦のカギ</h3>
+            <ol id="down-clues" class="clue-list"></ol>
+          </div>
+          <div>
+            <h3>横のカギ</h3>
+            <ol id="across-clues" class="clue-list"></ol>
+          </div>
+        </aside>
+      </div>
+
+      <section id="password-panel" class="password-panel locked">
+        <p class="eyebrow">PASSWORD</p>
+        <h3>PASSWORD</h3>
+        <p>クロスワードに隠された合言葉を入力してください</p>
+        <div class="password-form">
+          <input id="password-input" type="text" inputmode="kana" autocomplete="off" disabled>
+          <button class="pixel-button" id="password-button" type="button" disabled>ENTER</button>
+        </div>
+        <p id="password-message" class="status-message" aria-live="polite"></p>
+      </section>
+
+      <p class="fan-credit screen-credit">
+        This is an unofficial fan-made game.<br>
+        Created by ちゃまっぴ（@chama_65）
+      </p>
+    </section>
+
+    <section id="celebration-screen" class="screen celebration-screen">
+      <button class="pixel-button fixed-top" id="scroll-explanations-button" type="button">回答と解説</button>
+
+      <section class="celebration-hero">
+        <img src="images/roco_birthday2026.jpeg" alt="鏑木ろこ誕生日モザイクアート" class="birthday-art">
+        <div class="birthday-copy" aria-live="polite">
+          <p class="birthday-line line-one">Happy Birthday</p>
+          <p class="birthday-line line-two">Roco Kaburaki</p>
+          <p class="birthday-line line-three">2026.07.18</p>
+        </div>
+      </section>
+
+      <section id="explanations" class="explanations">
+        <div class="section-heading">
+          <p class="eyebrow">ANSWERS</p>
+          <h2>回答と解説</h2>
+        </div>
+        <div id="explanation-list" class="accordion-list"></div>
+        <button class="pixel-button primary play-again-button" id="play-again-button" type="button">PLAY AGAIN</button>
+        <p class="fan-credit">
+          This is an unofficial fan-made game.<br>
+          Created by ちゃまっぴ（@chama_65）
+        </p>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="how-to-dialog" class="how-to-dialog">
+    <form method="dialog">
+      <h2>HOW TO PLAY</h2>
+      <p>① ヒントをたよりに<br>クロスワードを完成させよう！</p>
+      <p>② CHECKで答え合わせ！</p>
+      <p>③ クロスワードに隠された<br>PASSWORDを見つけよう！</p>
+      <p>④ PASSWORDを入力すると…</p>
+      <button class="pixel-button primary" type="submit">OK</button>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
