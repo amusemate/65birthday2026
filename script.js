@@ -69,7 +69,7 @@ const explanations = [
   { group: "縦のカギ", number: 3, answer: "はんぎょどん", text: "Xのリプ返にて複数回言及が確認されている。（一般の方へのリプライのため引用は割愛）" },
   { group: "縦のカギ", number: 4, answer: "ぱきけふぁろさうるす", text: "2026年65の日配信にて、自作ゲームをプレイしてくれた後輩ライバーから好きな恐竜を聞かれた際の返答。", url: "https://www.youtube.com/live/h5qutQOMhx4" },
   { group: "縦のカギ", number: 5, answer: "めちゃくそ", text: "鏑木の初めての歌ってみた動画『ぼくの夢、メチャクソ無限湧き』。鏑木が自作した手描き+実写の動画も必見。", url: "https://youtu.be/2tEyGR-QReY" },
-  { group: "縦のカギ", number: 6, answer: "だっきゅう", text: "朝配信「おはろこ！」内で行われている鏑木じゃんけんのルール。「ここがグー、ここがチョキ、ここがパーで戦いましょう。買ったら良いこと2倍、負けたらやなこと2倍、あいこは特に変化なし。グーチョキパー以外とフライングは肩脱臼」", url: "https://youtube.com/playlist?list=PLFa9jhofs5Iujz7yoMiS6Rh_vG-1obvk1&si=_zHzNy1_CcFvVRZ-" },
+  { group: "縦のカギ", number: 6, answer: "だっきゅう", text: "朝配信「おはろこ！」内で行われている鏑木じゃんけんのルール。「ここがグー、ここがチョキ、ここがパーで戦いましょう。勝ったら良いこと2倍、負けたらやなこと2倍、あいこは特に変化なし。グーチョキパー以外とフライングは肩脱臼」", url: "https://youtube.com/playlist?list=PLFa9jhofs5Iujz7yoMiS6Rh_vG-1obvk1&si=_zHzNy1_CcFvVRZ-" },
   { group: "縦のカギ", number: 7, answer: "すきぴお", text: "デビュー直後に投稿された動画での発言。", url: "https://youtu.be/mK5QuondtKA" },
   { group: "縦のカギ", number: 8, answer: "ごびさばく", text: "雑学でモテようとした鏑木が最初に披露したネタ。", url: "https://www.youtube.com/live/juK6wWaQWoU" },
   { group: "縦のカギ", number: 10, answer: "どくたーすとーん", text: "鏑木が事あるごとに語っている大好きな漫画。配信の端々で挟まれるオタク語り、公式番組での熱量溢れるプレゼン、メン限での同時視聴などからドクスト愛を垣間見ることができる。", url: "https://youtu.be/rhImp6Rfyt0" },
